@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" placeholder="Enter a string" id="inputVal"/>
+    <br>
+
+    <button onclick="getData()">Reverse String</button>
+
+    <p id="data"></p>
+    <script>
+
+        
+        const getData=()=>{
+            let s=document.getElementById("inputVal").value
+            let reversedString =s.split("").reduce((acc, char) => char + acc, "");
+            // alert(reversedString)
+
+            document.getElementById("data").innerHTML=reversedString
+
+        }
+    </script>
+</body>
+</html>

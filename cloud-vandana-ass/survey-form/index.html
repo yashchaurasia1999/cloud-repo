@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Survey-Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="form.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+    
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 id="title" class="text-center">Restaurant Feedback Form</h1>
+
+    </header>
+    <form id="survey-form" onsubmit="getData(e)">
+      <div class="form-group d-flex flex-row mb-3">
+        <label id="name-label" for="name">First Name</label>
+        <input type="text" name="name" id="fName" class="form-control" placeholder="Enter your First Name" />
+        <p id="errFirst" style="color:red"></p>
+        <label id="name-label" for="name">Last Name</label>
+        <input type="text" name="name" id="lName" class="form-control" placeholder="Enter your Last Name"  />
+        <p id="errLast" style="color:red"></p>
+      </div>
+      <div class="form-group d-flex flex-row mb-3">
+        <label id="email-label" for="email">Email</label>
+        <input type="text" name="email" id="email" class="form-control" placeholder="Enter your Email"  />
+        <p id="errEmail"  style="color:red"></p>
+        <label id="email-label" for="email">Mobile No.</label>
+        <input type="text" name="email" id="phone" class="form-control" placeholder="Enter your Mobile No."  />
+        <p id="errMobile" style="color:red"></p>
+      </div>
+      <div class="form-group d-flex flex-row mb-3">
+        <label id="email-label" for="email">Date of Birth</label>
+        <input type="date" name="date" id="date" class="form-control" placeholder="Date of Birth"  />
+        <p id="errDate"  style="color:red"></p>
+        <label id="pro" for="email">Profession</label>
+        <input type="text" name="profession" id="profession" class="form-control" placeholder="Profession"  />
+        <p id="errPro"  style="color:red"></p>
+      </div>
+      <label>Gender</label>
+      <div class="form-check d-inline-flex">
+        <input class="form-check-input" type="radio" name="exampleRadios1" id="exampleRadios1Yes" value="male" checked>
+        <label class="form-check-label" for="exampleRadios1Yes">
+          &nbsp; &nbsp;Male
+        </label>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <input class="form-check-input" type="radio" name="exampleRadios1" id="exampleRadios1No" value="female">
+        <label class="form-check-label" for="exampleRadios1No">
+          &nbsp; &nbsp;Female
+        </label>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <input class="form-check-input" type="radio" name="exampleRadios1" id="exampleRadios1No" value="other">
+        <label class="form-check-label" for="exampleRadios1No">
+          &nbsp; &nbsp;Other
+        </label>
+      </div>
+   
+      <div class="form-group d-flex flex-row mb-3">
+        <button type="submit" id="submit"  class="submit-button">
+          Submit
+        </button>
+        <button type="button" id="reset" onclick="resetForm()" class="submit-button">
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color:red">Form Submitted</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="color: black;">
+          
+          <p id="modalContent"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+    document.getElementById('survey-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      getData();
+    });
+
+    function resetForm() {
+
+      document.getElementById('fName').value="";
+
+      document.getElementById('lName').value="";
+      
+      document.getElementById('email').value="";
+      document.getElementById('phone').value="";
+
+      document.getElementById('profession').value="";
+      document.getElementById('date').value="";
+     
+
+    }
+
+    function getData() {
+      console.log("Data submitted:");
+       let fname=document.getElementById('fName').value
+       let lname=document.getElementById('lName').value
+       let email=document.getElementById('email').value
+       let phone=document.getElementById('phone').value
+       let prof=document.getElementById('profession').value
+       let date=document.getElementById('date').value
+      console.log(date)
+       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+       const phoneRegex = /^\d{10}$/;
+       const firstNameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+       const profRegex=/^[A-Za-z]+(?: [A-Za-z]+)*$/;
+       const lastNameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+      if(!emailRegex.test(email))
+      {
+        document.getElementById("errEmail").innerText="invalid email"
+        setTimeout(() => {
+          document.getElementById("errEmail").innerText=""
+        }, 2000);
+      }
+      if(!phoneRegex.test(phone))
+      {
+        document.getElementById("errMobile").innerText="invalid Mobile No."
+        setTimeout(() => {
+          document.getElementById("errMobile").innerText=""
+        }, 2000);
+      }
+      if(!firstNameRegex.test(fname)) 
+      {
+        document.getElementById("errFirst").innerText="invalid first name"
+        setTimeout(() => {
+          document.getElementById("errFirst").innerText=""
+        }, 2000);
+      }
+      if(!lastNameRegex.test(lname)) 
+      {
+        document.getElementById("errLast").innerText="invalid last name"
+        setTimeout(() => {
+          document.getElementById("errLast").innerText=""
+        }, 2000);
+      }
+      if(!profRegex.test(prof)) 
+      {
+        document.getElementById("errPro").innerText="invalid Profession"
+        setTimeout(() => {
+          document.getElementById("errPro").innerText=""
+        }, 2000);
+      }
+      if(!date)
+      {
+        document.getElementById("errDate").innerText="Please select the date"
+        setTimeout(() => {
+          document.getElementById("errDate").innerText=""
+        }, 2000);
+        
+
+      }
+      const genderElements = document.getElementsByName('exampleRadios1');
+  let selectedGender;
+
+  for (const genderElement of genderElements) {
+    if (genderElement.checked) {
+      selectedGender = genderElement.value;
+      break;
+    }
+  }
+
+
+
+  // console.log("Selected Gender:", selectedGender);
+      
+      if(emailRegex.test(email) && phoneRegex.test(phone) && firstNameRegex.test(fname)  && lastNameRegex.test(lname))
+      {
+        console.log("all the values are correct");
+        document.getElementById("modalContent").innerText =
+          `First Name: ${fname}\nLast Name: ${lname}\nEmail: ${email}\nPhone: ${phone} \n Gender: ${selectedGender} \n Profession: ${prof} \n Date: ${date}`;
+        new bootstrap.Modal(document.getElementById('exampleModal')).show();
+        resetForm()
+      }
+     
+
+
+    }
+      // Additional data retrieval logic can be added here
+  </script>
+
+</body>
+
+</html>
